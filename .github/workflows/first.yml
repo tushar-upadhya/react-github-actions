@@ -80,12 +80,8 @@ jobs:
           name: artifacts
           path: dist/
           retention-days: 7
-            - name: Install Vercel CLI
+      - name: Install Vercel CLI
         run: npm install --global vercel
 
       - name: Deployment on Vercel
         run: vercel deploy dist --prod --yes --token="${{ secrets.VERCEL_TOKEN }}"
-
-
-
-
