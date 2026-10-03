@@ -10,11 +10,11 @@ export default defineConfig({
 
     setupFiles: "./src/test/setup.js",
 
-    pool: "forks",
+    pool: "threads",
 
     poolOptions: {
-      forks: {
-        singleFork: true,
+      threads: {
+        singleThread: true,
       },
     },
   },
