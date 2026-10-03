@@ -7,7 +7,7 @@ on:
     branches: [main, dev, qa]
 
 jobs:
-  first-job:
+  lint-job:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -30,12 +30,48 @@ jobs:
       - name: Run tests
         run: npm run test
 
-      - name: Build React app
-        run: npm run build
+    test-job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
 
-      - name: Upload build artifact
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+
+      - name: Run tests
+        run: npm run test
+
+    build-job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+      - name: create artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: react-build
-          path: dist/
+          name: artifacts
+          path: /dist
           retention-days: 7
+
+
