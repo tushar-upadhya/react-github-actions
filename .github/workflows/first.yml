@@ -3,6 +3,7 @@ name: "first-workflow"
 on:
   push:
     branches: [main]
+
   pull_request:
     branches: [main, dev, qa]
 
@@ -27,10 +28,7 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-      - name: Run tests
-        run: npm run test
-
-    test-job:
+  test-job:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -47,11 +45,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-
       - name: Run tests
         run: npm run test
 
-    build-job:
+  build-job:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -67,11 +64,13 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-      - name: create artifacts
+
+      - name: Create production build
+        run: npm run build
+
+      - name: Create artifacts
         uses: actions/upload-artifact@v4
         with:
           name: artifacts
-          path: /dist
+          path: dist/
           retention-days: 7
-
-
