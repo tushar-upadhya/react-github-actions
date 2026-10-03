@@ -5,9 +5,10 @@ export default defineConfig({
   plugins: [react()],
 
   test: {
-    environment: "jsdom",
+    environment: "happy-dom", // lighter than jsdom 30, avoids the memory blowup
     setupFiles: "./src/test/setup.js",
-    globals: true, // optional, but handy with jest-dom
-    fileParallelism: false, // replaces singleThread: true
+    globals: true,
+    fileParallelism: false,
+    testTimeout: 10000,
   },
 });
