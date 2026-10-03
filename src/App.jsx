@@ -1,12 +1,10 @@
 const App = () => {
-  // const [count, setCount] = useState(0);
-
   return (
-    <App className="text-3xl font-bold underline ">
-      home
+    <div className="text-3xl font-bold underline">
+      <p>home</p>
       <div>feature 1</div>
       <span>home</span>
-    </App>
+    </div>
   );
 };
 
